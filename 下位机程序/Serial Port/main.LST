@@ -1,0 +1,113 @@
+C51 COMPILER V9.01   MAIN                                                                  05/31/2018 13:01:06 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "reg51.h"
+   2          
+   3          typedef unsigned char BYTE;
+   4          typedef unsigned int u8;
+   5          
+   6          sbit Port0_0=P0^0;
+   7          sbit Port0_1=P0^1;
+   8          sbit Port0_2=P0^2;
+   9          sbit Port0_3=P0^3;
+  10          sbit Port0_4=P0^4;
+  11          sbit Port0_5=P0^5;
+  12          sbit Port0_6=P0^6;
+  13          sbit Port0_7=P0^7;
+  14          
+  15          sbit Port1_0=P1^0;
+  16          sbit Port1_1=P1^1;
+  17          sbit Port1_2=P1^2;
+  18          sbit Port1_3=P1^3;
+  19          sbit Port1_4=P1^4;
+  20          sbit Port1_5=P1^5;
+  21          sbit Port1_6=P1^6;
+  22          sbit Port1_7=P1^7;
+  23          
+  24          sbit Port2_0=P2^0;
+  25          sbit Port2_1=P2^1;
+  26          sbit Port2_2=P2^2;
+  27          sbit Port2_3=P2^3;
+  28          sbit Port2_4=P2^4;
+  29          sbit Port2_5=P2^5;
+  30          sbit Port2_6=P2^6;
+  31          sbit Port2_7=P2^7;
+  32          
+  33          BYTE ReceiveBytes[3];
+  34          
+  35          unsigned int receiveCount=0;
+  36          
+  37          
+  38          void initSerial(){
+  39   1              TMOD=0x20;
+  40   1              TH1=0xF3;
+  41   1              TL1=0xF3;
+  42   1              PCON=0x80;
+  43   1              TR1=1;
+  44   1              SCON=0x50;      //
+  45   1              ES=1;    //打开串口中断
+  46   1              EA=1;  //打开总的终端
+  47   1      }
+  48          
+  49          void delayms(u8 ms){    //delay毫秒数
+  50   1              u8 i,j;
+  51   1              for(i=ms;i>0;i--){
+  52   2                      for(j=110;j>0;j--);
+  53   2              }       
+  54   1      }
+  55          
+C51 COMPILER V9.01   MAIN                                                                  05/31/2018 13:01:06 PAGE 2   
+
+  56          
+  57          void main(){
+  58   1              P0=0xff;
+  59   1              initSerial();
+  60   1              while(1);
+  61   1      }
+  62          
+  63          
+  64          void Serial() interrupt 4{      //串口中断
+  65   1              BYTE input; //输入的字符
+  66   1              //u8 i;
+  67   1              input=SBUF;
+  68   1              while(!RI);
+  69   1              RI=0;
+  70   1              if(input==0x00){
+  71   2                      Port0_0=0; //设置P00口为低电平
+  72   2                      SBUF=Port0_0; //将P00口的电平发送到串口
+  73   2                      while(!TI);
+  74   2                      TI=0;
+  75   2              }else if(input==0x01){
+  76   2                      Port0_0=1; //设置P00口为高电平
+  77   2                      SBUF=Port0_0; //将P00口的电平发送到串口
+  78   2                      while(!TI);
+  79   2                      TI=0;
+  80   2              }else{
+  81   2                      SBUF=0x83;
+  82   2                      while(!TI);
+  83   2                      TI=0;
+  84   2              }
+  85   1      }
+  86          
+  87          
+  88          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    126    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

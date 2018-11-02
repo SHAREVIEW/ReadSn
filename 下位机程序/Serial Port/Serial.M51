@@ -1,0 +1,151 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/31/2018  13:01:06  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO Serial
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Serial (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0005H     UNIT         ?DT?MAIN
+            IDATA   000DH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     001EH     UNIT         ?PR?_DELAYMS?MAIN
+                    0021H     0002H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00B2H     0042H     UNIT         ?PR?SERIAL?MAIN
+            CODE    00F4H     0016H     UNIT         ?PR?INITSERIAL?MAIN
+            CODE    010AH     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    0112H     0005H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   Serial (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?INITSERIAL?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Serial (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/31/2018  13:01:06  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  C:00F4H         PUBLIC        initSerial
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:010AH         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  D:0087H         PUBLIC        PCON
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  D:0008H         PUBLIC        ReceiveBytes
+  B:0088H.6       PUBLIC        TR1
+  C:00B2H         PUBLIC        Serial
+  B:0080H.0       PUBLIC        Port0_0
+  C:0003H         PUBLIC        _delayms
+  D:000BH         PUBLIC        receiveCount
+  -------         PROC          INITSERIAL
+  C:00F4H         LINE#         38
+  C:00F4H         LINE#         39
+  C:00F7H         LINE#         40
+  C:00FAH         LINE#         41
+  C:00FDH         LINE#         42
+  C:0100H         LINE#         43
+  C:0102H         LINE#         44
+  C:0105H         LINE#         45
+  C:0107H         LINE#         46
+  C:0109H         LINE#         47
+  -------         ENDPROC       INITSERIAL
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0003H         LINE#         49
+  C:0003H         LINE#         51
+  C:000CH         LINE#         52
+  C:0019H         LINE#         53
+  C:0020H         LINE#         54
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          MAIN
+  C:010AH         LINE#         57
+  C:010AH         LINE#         58
+  C:010DH         LINE#         59
+  C:0110H         LINE#         60
+  -------         ENDPROC       MAIN
+  -------         PROC          SERIAL
+  -------         DO            
+  D:0007H         SYMBOL        input
+  -------         ENDDO         
+  C:00B2H         LINE#         64
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/31/2018  13:01:06  PAGE 3
+
+
+  C:00BBH         LINE#         67
+  C:00BDH         LINE#         68
+  C:00C0H         LINE#         69
+  C:00C2H         LINE#         70
+  C:00C5H         LINE#         71
+  C:00C7H         LINE#         72
+  C:00CCH         LINE#         73
+  C:00CFH         LINE#         74
+  C:00D1H         LINE#         75
+  C:00D6H         LINE#         76
+  C:00D8H         LINE#         77
+  C:00DEH         LINE#         78
+  C:00E1H         LINE#         79
+  C:00E3H         LINE#         80
+  C:00E5H         LINE#         81
+  C:00E8H         LINE#         82
+  C:00EBH         LINE#         83
+  C:00EDH         LINE#         84
+  C:00EDH         LINE#         85
+  -------         ENDPROC       SERIAL
+  -------         ENDMOD        MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAYMS?MAIN
+
+Program Size: data=14.0 xdata=0 code=277
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
